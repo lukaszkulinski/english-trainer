@@ -1,4 +1,5 @@
 
+console.log("🚀 Aplikacja startuje!"); // Dodaj to na samej górze pliku
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

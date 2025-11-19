@@ -90,7 +90,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentView, onChangeV
               <button
                 key={item.id}
                 onClick={() => onChangeView(item.id)}
-                className={`flex flex-col items-center justify-start pt-2 pb-1 space-y-1 transition-all duration-200 w-full min-w-0 ${
+                className={`flex flex-col items-center justify-start pt-2 pb-1 space-y-0.5 transition-all duration-200 w-full min-w-0 ${
                   active ? 'text-indigo-600' : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
@@ -101,7 +101,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentView, onChangeV
                     className={`transition-all ${active ? 'scale-110' : ''}`}
                   />
                 </div>
-                <span className={`text-[10px] font-medium tracking-wide transition-colors w-full text-center truncate px-0.5 leading-tight ${active ? 'text-indigo-700' : ''}`}>
+                {/* Removed truncate, added break-words and leading-none to handle long translations */}
+                <span className={`text-[10px] font-medium tracking-wide transition-colors w-full text-center break-words leading-none px-0.5 ${active ? 'text-indigo-700' : ''}`}>
                   {item.label}
                 </span>
               </button>

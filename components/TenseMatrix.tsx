@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { TenseCategory, TenseAspect, TenseInfo } from '../types';
-import { BookOpen, X, Sparkles, ChevronRight, LayoutGrid, ListFilter } from 'lucide-react';
+import { BookOpen, X, Sparkles, ChevronRight, LayoutGrid } from 'lucide-react';
 import { geminiService } from '../services/geminiService';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -93,7 +93,8 @@ export const TenseMatrix: React.FC<TenseMatrixProps> = ({ onPractice }) => {
           <button
             key={cat}
             onClick={() => setMobileTab(cat)}
-            className={`flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 break-words leading-tight ${isActive ? activeClass : inactiveClass}`}
+            // Added hyphens-auto for languages like Polish where "Teraźniejszość" might need a hyphen
+            className={`flex-1 py-2.5 text-[11px] sm:text-sm font-bold rounded-lg transition-all duration-200 break-words hyphens-auto leading-tight px-1 ${isActive ? activeClass : inactiveClass}`}
           >
             {t(cat)}
           </button>
@@ -235,4 +236,29 @@ export const TenseMatrix: React.FC<TenseMatrixProps> = ({ onPractice }) => {
               <div className="flex flex-col md:flex-row gap-3">
                 <button 
                   onClick={() => onPractice(selectedTense.name)}
-                  className="flex-1 bg-slate
+                  className="flex-1 bg-slate-900 text-white py-3.5 px-4 rounded-xl font-bold text-sm md:text-base hover:bg-slate-800 transition-colors flex items-center justify-center gap-2 active:scale-[0.98]"
+                >
+                  <BookOpen size={18} />
+                  {t('btn_practice_now')}
+                </button>
+                
+                <button 
+                  onClick={fetchExplanation}
+                  disabled={loadingAi}
+                  className="flex-1 border border-slate-200 bg-white text-slate-700 py-3.5 px-4 rounded-xl font-semibold text-sm md:text-base hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-[0.98]"
+                >
+                  {loadingAi ? (
+                    <span className="animate-spin rounded-full h-4 w-4 border-2 border-slate-400 border-t-transparent"></span>
+                  ) : (
+                    <Sparkles size={18} className="text-indigo-500" />
+                  )}
+                  {aiExplanation ? t('btn_regenerate') : t('btn_explain_ai')}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { CURRICULUM } from '../data/curriculum';
 import { Chapter } from '../types';
-import { ChevronDown, ChevronRight, BookOpen, CheckCircle2, Lock } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface CurriculumViewProps {
@@ -61,7 +61,8 @@ export const CurriculumView: React.FC<CurriculumViewProps> = ({ onSelectChapter 
                          {idx + 1}
                        </div>
                        <div className="min-w-0">
-                         <h4 className="font-bold text-sm md:text-base text-slate-800 group-hover:text-indigo-700 transition-colors truncate break-words whitespace-normal">{chapter.title}</h4>
+                         {/* Removed truncate to allow long Polish titles to wrap */}
+                         <h4 className="font-bold text-sm md:text-base text-slate-800 group-hover:text-indigo-700 transition-colors break-words">{chapter.title}</h4>
                          <p className="text-[10px] md:text-xs text-slate-500 mt-1 line-clamp-1">
                             {chapter.content.join(" • ")}
                          </p>
